@@ -1,13 +1,13 @@
 var io = require('socket.io');
 
-var app = express()
-  , server = require('http').createServer(app)
-  , io = io.listen(server)
-  , port = process.env.PORT || 3000;
+var app = express(),
+	server = require('http').createServer(app),
+	app = io.listen(server),
+	port = process.env.PORT || 3000;
 
 server.listen(port);
 
-io.sockets.on('connection', function (socket) {
+app.sockets.on('connection', function (socket) {
   socket.on('chat:add', function (data) {
     console.log(data);
   });
