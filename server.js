@@ -1,6 +1,6 @@
-const io = require('socket.io');
+var io = require('socket.io');
 
-const app = express()
+var app = express()
   , server = require('http').createServer(app)
   , io = io.listen(server)
   , port = process.env.PORT || 3000;
