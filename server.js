@@ -1,17 +1,32 @@
-var io = require('socket.io');
-var express = require('express');
+var http = require("http");
+var express = require("express");
+var socketIo = require("socket.io");
 
-var app = express(),
-	server = require('http').createServer(app),
-	app = io.listen(server),
-	port = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
+const server = new http.Server(app);
+const io = socketIo(server);
 
-server.listen(port);
+var history = [];
+console.log("All const and vars are required");
 
-app.sockets.on('connection', function (socket) {
-  socket.on('chat:add', function (data) {
-    console.log(data);
-  });
+io.on('connection', socket => {
+	console.log("A new user just connected");
+
+	socket.on("chat:add", data => {
+		console.log(data);
+		history.push(data);
+		io.emit("chat:added", data);
+	});
+	
+	socket.on('disconnect', () => {
+		console.log("A user disconnected");
+	});
+});
+
+
+server.listen(port, () => {
+	console.log(`Server started on http://localhost:${port}`);
 });
 
 module.exports = server;
