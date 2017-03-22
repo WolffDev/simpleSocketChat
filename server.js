@@ -14,4 +14,4 @@ app.sockets.on('connection', function (socket) {
   });
 });
 
-module.exports(server);
+module.exports = server;
