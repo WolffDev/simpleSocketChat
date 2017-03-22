@@ -8,6 +8,7 @@ const server = new http.Server(app);
 const io = socketIo(server);
 
 var history = [];
+console.log("All const and vars are required");
 
 io.on('connection', socket => {
 	console.log("A new user just connected");
