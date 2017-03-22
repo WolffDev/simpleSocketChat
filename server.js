@@ -1,11 +1,9 @@
-"use strict";
-
 var http = require("http"),
 	express = require("express"),
 	socketIo = require("socket.io");
 
 const app = express();
-const port = 3232;
+const port = process.env.PORT || 3000;
 const server = new http.Server(app);
 const io = socketIo(server);
 
@@ -29,3 +27,5 @@ io.on('connection', socket => {
 server.listen(port, () => {
 	console.log(`Server started on http://localhost:${port}`);
 });
+
+module.exports = server;
