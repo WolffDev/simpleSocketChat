@@ -12,3 +12,5 @@ io.sockets.on('connection', function (socket) {
     console.log(data);
   });
 });
+
+module.exports(server);
